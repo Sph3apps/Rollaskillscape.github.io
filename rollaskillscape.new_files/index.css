@@ -1,0 +1,225 @@
+
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
+
+:root {
+  --background: #161b21;
+  --panel-bg: rgba(34,39,48,0.98);
+  --border: #3a465a;
+  --primary: #fff;
+  --secondary: #aea;
+  --accent: #FFD700;
+  --button-bg: #222c3a;
+  --button-active-bg: #fff;
+  --button-font: #222c3a;
+  --badge: #35deaf;
+  --tutorial-bg: rgba(34,39,48,0.98);
+}
+
+[data-theme="light"] {
+  --background: #eef3fa;
+  --panel-bg: #fff;
+  --border: #bbc;
+  --primary: #222c3a;
+  --secondary: #2b2b2b;
+  --accent: #1976d2;
+  --button-bg: #fff;
+  --button-active-bg: #222c3a;
+  --button-font: #fff;
+  --badge: #25b9cc;
+  --tutorial-bg: #fff;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--background);
+  color: var(--primary);
+  font-family: 'Eagle Lake', cursive;
+  text-align: center;
+  min-height: 100vh;
+  transition: background 0.35s;
+  font-size: 1rem;
+}
+
+.panel {
+  width: 95vw;
+  max-width: 430px;
+  min-height: 40vh;
+  background: var(--panel-bg);
+  border: 2px solid var(--border);
+  border-radius: 15px;
+  box-shadow: 0 6px 32px rgba(2, 9, 44, 0.3);
+  margin: 28px 0;
+  padding: 2em 1em 1.8em 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: background 0.35s, color 0.35s;
+}
+
+.btn {
+  background: var(--button-bg);
+  color: var(--primary);
+  border: 2px solid var(--border);
+  padding: 14px 22px;
+  margin: 7px 3px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1.04em;
+  font-family: 'Eagle Lake', cursive;
+  font-weight: bold;
+  transition: background 0.17s, color 0.12s;
+}
+
+.btn:hover {
+  background: var(--button-active-bg);
+  color: var(--button-font);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-small {
+  background: var(--button-bg);
+  color: var(--primary);
+  border: 2px solid var(--border);
+  padding: 6px 10px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-family: 'Eagle Lake', cursive;
+  font-weight: bold;
+  transition: background 0.17s, color 0.12s;
+}
+
+.btn-small:hover {
+  background: var(--button-active-bg);
+  color: var(--button-font);
+}
+
+.select {
+  background: var(--button-bg);
+  color: var(--primary);
+  border: 2px solid var(--border);
+  padding: 8px 12px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 0.9em;
+  font-family: 'Eagle Lake', cursive;
+  font-weight: bold;
+  transition: background 0.17s, color 0.12s;
+  min-width: 100px;
+}
+
+.select:hover {
+  background: var(--button-active-bg);
+  color: var(--button-font);
+}
+
+.skill-icon {
+  width: 42px;
+  height: 42px;
+  vertical-align: middle;
+  margin-right: 10px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  background: #222;
+  object-fit: contain;
+}
+
+.result {
+  margin-top: 26px;
+  font-size: 1.15em;
+  word-break: break-word;
+  color: var(--primary);
+}
+
+.history {
+  background: rgba(34, 39, 48, 0.86);
+  border: 2px solid #222;
+  border-radius: 10px;
+  padding: 14px 8px;
+  margin-top: 20px;
+  text-align: left;
+  max-height: 200px;
+  font-size: 0.99em;
+  color: var(--primary);
+  font-family: 'Eagle Lake', cursive;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.badge {
+  display: inline-block;
+  background: var(--badge);
+  color: #222;
+  font-weight: bold;
+  font-size: 1em;
+  border-radius: 20px;
+  margin: 3px 6px 3px 0;
+  padding: 7px 18px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom CSS classes for Tailwind integration */
+.bg-panel {
+  background: var(--panel-bg);
+}
+
+.bg-tutorial {
+  background: var(--tutorial-bg);
+}
+
+.border-border {
+  border-color: var(--border);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.font-eagle {
+  font-family: 'Eagle Lake', cursive;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  .panel {
+    width: 99vw;
+    max-width: 99vw;
+    padding: 1.2em 2vw 1em 2vw;
+    font-size: 1em;
+  }
+  
+  .btn, .select {
+    font-size: 1em;
+    min-width: 44px;
+    padding: 13px 8px;
+  }
+  
+  .skill-icon {
+    width: 36px;
+    height: 36px;
+  }
+}
