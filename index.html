@@ -1,0 +1,1002 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RollaSkillScape - Random Skill Generator</title>
+  <link rel="icon" href="https://i.postimg.cc/HWQZDzKv/f847b95c-ccff-4310-9bb7-c19ae8d300e3-removebg-preview.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Eagle+Lake&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: #0a0a0a;
+      --panel-bg: rgba(15, 15, 15, 0.85);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+      --primary: #ffffff;
+      --secondary: #a1a1aa;
+      --accent: #fbbf24;
+      --accent-hover: #f59e0b;
+      --button-bg: rgba(255, 255, 255, 0.08);
+      --button-hover: rgba(255, 255, 255, 0.15);
+      --success: #10b981;
+      --danger: #ef4444;
+      --shadow: rgba(0, 0, 0, 0.3);
+      --glow: rgba(251, 191, 36, 0.3);
+    }
+    
+    [data-theme="light"] {
+      --background: #f8fafc;
+      --panel-bg: rgba(255, 255, 255, 0.9);
+      --glass-bg: rgba(0, 0, 0, 0.02);
+      --border: rgba(0, 0, 0, 0.1);
+      --primary: #1e293b;
+      --secondary: #64748b;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --button-bg: rgba(0, 0, 0, 0.05);
+      --button-hover: rgba(0, 0, 0, 0.1);
+      --success: #059669;
+      --danger: #dc2626;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --glow: rgba(37, 99, 235, 0.2);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html, body {
+      height: 100%;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+    }
+    
+    body {
+      background: var(--background);
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(251, 191, 36, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.1) 0%, transparent 50%),
+        url("https://storage.ko-fi.com/cdn/useruploads/db063a23-d9a5-498a-aaad-43f4fc4408d4_gielinor_map_rs3_wallpaper-1440p.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      background-size: cover;
+      color: var(--primary);
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      padding-top: 80px;
+      backdrop-filter: brightness(0.8);
+    }
+    
+    .center-container {
+      width: 100vw;
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+    
+    #welcome-screen, #game-panel {
+      background: var(--panel-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 
+        0 25px 50px var(--shadow),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      padding: 2.5rem 2rem;
+      max-width: 750px;
+      width: 100%;
+      margin: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      max-height: calc(90vh - 80px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(0);
+    }
+    
+    #welcome-screen:hover, #game-panel:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 35px 70px var(--shadow),
+        0 0 0 1px rgba(255, 255, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    
+    #game-panel { 
+      display: none; 
+    }
+    
+    #welcome-title { 
+      font-size: 3rem; 
+      font-weight: 700;
+      margin-bottom: 1.5rem; 
+      color: var(--accent); 
+      font-family: 'Eagle Lake', cursive; 
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 30px var(--glow);
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    #intro {
+      font-size: 1.1rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      max-width: 400px;
+      line-height: 1.7;
+    }
+    
+    #welcome-section {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 2rem;
+    }
+    
+    #welcome-section > div {
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+    
+    #welcome-section strong {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    #welcome-section ul {
+      margin: 1rem 0 0 1.5rem;
+      color: var(--secondary);
+    }
+    
+    #welcome-section li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .skill-icon { 
+      width: 44px; 
+      height: 44px; 
+      vertical-align: middle; 
+      margin-right: 12px; 
+      border-radius: 10px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3); 
+      background: var(--glass-bg); 
+      object-fit: contain; 
+      user-select: none; 
+      pointer-events: none;
+      transition: transform 0.2s ease;
+    }
+    
+    .skill-icon:hover {
+      transform: scale(1.05);
+    }
+    
+    button, select {
+      background: var(--button-bg);
+      backdrop-filter: blur(10px);
+      color: var(--primary); 
+      border: 1px solid var(--border);
+      padding: 14px 28px; 
+      margin: 8px 6px; 
+      cursor: pointer; 
+      border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      font-weight: 500; 
+      font-size: 1rem; 
+      min-width: 44px;
+      font-family: 'Inter', sans-serif; 
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Enhanced select styling for better visibility */
+    select {
+      background: var(--panel-bg);
+      color: var(--primary);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23a1a1aa' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 12px center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      padding-right: 40px;
+    }
+    
+    select option {
+      background: var(--panel-bg);
+      color: var(--primary);
+      padding: 8px 12px;
+      border: none;
+    }
+    
+    [data-theme="light"] select {
+      background: var(--panel-bg);
+      color: var(--primary);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    }
+    
+    [data-theme="light"] select option {
+      background: var(--panel-bg);
+      color: var(--primary);
+    }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.5s;
+    }
+    
+    button:hover::before {
+      left: 100%;
+    }
+    
+    button:focus, select:focus { 
+      border-color: var(--accent); 
+      box-shadow: 0 0 0 3px var(--glow);
+      transform: translateY(-1px);
+    }
+    
+    button:hover, select:hover { 
+      background: var(--button-hover);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--shadow);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    #lets-roll-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 16px 32px;
+      box-shadow: 0 8px 25px var(--glow);
+      border: none;
+    }
+    
+    #lets-roll-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px var(--glow);
+    }
+    
+    label { 
+      font-size: 0.95rem; 
+      font-weight: 500;
+      margin-right: 12px; 
+      color: var(--secondary); 
+      font-family: 'Inter', sans-serif; 
+    }
+    
+    .result { 
+      margin-top: 2rem; 
+      font-size: 1.2rem; 
+      word-break: break-word;
+      padding: 2rem;
+      background: var(--glass-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      width: 100%;
+      text-align: center; 
+    }
+    
+   
+    .result p {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    
+    .result .skill-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+    
+    .result .skill-icon {
+      margin: 0; 
+    }
+    
+    .history {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: 12px; 
+      padding: 1.5rem; 
+      margin-top: 1.5rem;
+      text-align: left; 
+      overflow-y: auto; 
+      max-height: 250px; 
+      font-size: 0.9rem; 
+      word-break: break-word;
+      color: var(--secondary); 
+      font-family: 'Inter', sans-serif;
+      width: 100%;
+    }
+    
+    .history strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    
+    .fixed-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      box-shadow: 0 8px 32px var(--shadow);
+      flex-wrap: wrap;
+    }
+    
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    
+    .control-group label {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .control-group select {
+      padding: 8px 12px;
+      margin: 0;
+      font-size: 0.9rem;
+      min-width: auto;
+      border-radius: 8px;
+      padding-right: 32px;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { 
+        opacity: 1; 
+        transform: scale(1);
+      }
+      50% { 
+        opacity: 0.8; 
+        transform: scale(1.02);
+      }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px var(--glow); }
+      50% { box-shadow: 0 0 40px var(--glow); }
+    }
+    
+    .rolling {
+      animation: pulse 0.6s infinite;
+    }
+    
+    #welcome-screen, #game-panel {
+      animation: fadeInUp 0.6s ease-out;
+    }
+    
+    /* Mobile optimizations */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 100px;
+      }
+      
+      .center-container {
+        min-height: calc(100vh - 100px);
+        padding: 0 16px;
+      }
+      
+      .fixed-bar {
+        padding: 12px 16px;
+        gap: 16px;
+      }
+      
+      .control-group {
+        gap: 8px;
+      }
+      
+      .control-group label {
+        font-size: 0.85rem;
+      }
+      
+      .control-group select {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+        padding-right: 28px;
+      }
+      
+      #welcome-screen, #game-panel { 
+        width: 100%;
+        padding: 2rem 1.5rem;
+        max-height: calc(90vh - 100px);
+        margin: 16px 0;
+      }
+      
+      #welcome-title {
+        font-size: 2.5rem;
+      }
+      
+      #intro {
+        font-size: 1rem;
+      }
+      
+      button, select { 
+        font-size: 0.95rem;
+        padding: 12px 20px;
+      }
+      
+      .skill-icon { 
+        width: 38px; 
+        height: 38px; 
+        margin-right: 10px; 
+      }
+      
+      .result { 
+        font-size: 1.1rem;
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding-top: 120px;
+      }
+      
+      .center-container {
+        min-height: calc(100vh - 120px);
+        padding: 0 12px;
+      }
+      
+      .fixed-bar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+      
+      .control-group {
+        justify-content: center;
+      }
+      
+      #welcome-screen, #game-panel {
+        width: 100%;
+        padding: 1.5rem 1rem;
+        max-height: calc(85vh - 120px);
+      }
+      
+      #welcome-title {
+        font-size: 2rem;
+        line-height: 1.2;
+      }
+      
+      #welcome-section > div {
+        padding: 1rem;
+      }
+      
+      button {
+        width: 100%;
+        margin: 6px 0;
+      }
+      
+      .control-group select {
+        min-width: 120px;
+        padding-right: 28px;
+      }
+    }
+    
+    /* Theme transitions */
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    
+    /* Improved focus styles for accessibility */
+    button:focus-visible, select:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    
+    /* Custom scrollbar */
+    .history::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .history::-webkit-scrollbar-track {
+      background: var(--glass-bg);
+      border-radius: 3px;
+    }
+    
+    .history::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 3px;
+    }
+    
+    .history::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+    
+    /* Enhanced ready state */
+    #ready {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin: 1.5rem 0;
+      animation: glow 2s infinite;
+    }
+  </style>
+</head>
+<body>
+  <div class="fixed-bar">
+    <div class="control-group">
+      <label for="language-select">🌐 Language:</label>
+      <select id="language-select">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="est">Eesti</option>
+        <option value="ger">Deutsch</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label for="theme-select">🎨 Theme:</label>
+      <select id="theme-select" aria-label="Theme selector">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="center-container">
+    <div id="welcome-screen">
+      <div id="welcome-title">ROLLASKILLSCAPE</div>
+      <p id="intro"></p>
+      <div id="welcome-section">
+        <div id="how-to">
+          <strong id="how_to"></strong>
+          <ul>
+            <li id="choose_mode"></li>
+            <li id="roll_skill"></li>
+            <li id="train_skill"></li>
+          </ul>
+        </div>
+        <div id="why-play">
+          <strong id="why_play"></strong>
+          <ul>
+            <li id="rediscover"></li>
+            <li id="break_cycle"></li>
+            <li id="make_fun"></li>
+          </ul>
+        </div>
+        <div id="re-roll">
+          <strong id="reroll"></strong><br>
+          <span id="reroll_desc"></span>
+        </div>
+        <div id="ready"></div>
+      </div>
+      <button id="lets-roll-btn" onclick="showGame()" autofocus><span id="lets_roll"></span></button>
+    </div>
+    
+    <div class="panel" id="game-panel">
+      <p id="welcome_game"></p>
+      <label for="modeSelect" id="select_mode"></label>
+      <select id="modeSelect" aria-label="Game mode selector">
+        <option value="time">Time Mode</option>
+        <option value="level">Level Mode</option>
+      </select>
+      <br>
+      <button onclick="rollAll()" id="roll-btn" aria-label=""><span id="roll_skill_btn"></span></button>
+      <button onclick="clearHistory()" id="clear-btn" aria-label=""><span id="clear_history_btn"></span></button>
+      <div class="result" id="output" aria-live="polite"></div>
+      <div class="history" id="history"></div>
+      <button onclick="backToWelcome()" id="back-btn" style="margin-top:15px;" aria-label=""><span id="back_to_Rules"></span></button>
+    </div>
+  </div>
+
+  <script>
+    const skills = [ "Agility","Attack","Constitution","Construction","Cooking","Crafting","Defence","Divination","Dungeoneering","Farming","Firemaking","Fishing","Fletching","Herblore","Hunter","Invention","Magic","Mining","Prayer","Ranged","Runecrafting","Slayer","Smithing","Strength","Summoning","Thieving","Woodcutting" ];
+    
+    const skillIcons = {
+      "Agility": "https://i.postimg.cc/JhWsdyLB/Agility.webp",
+      "Attack": "https://i.postimg.cc/jjrDkWb7/Attack.webp",
+      "Constitution": "https://i.postimg.cc/9fjDN4hZ/Constitution.webp",
+      "Construction": "https://i.postimg.cc/MG8nrcSB/Construction.webp",
+      "Cooking": "https://i.postimg.cc/rpLDYdkW/Cooking.webp",
+      "Crafting": "https://i.postimg.cc/FKQYnf40/Crafting.webp",
+      "Defence": "https://i.postimg.cc/jjrDkWbz/Defence.webp",
+      "Divination": "https://i.postimg.cc/KYr1XZG1/Divination.webp",
+      "Dungeoneering": "https://i.postimg.cc/MGbnkW6c/Dungeoneering.webp",
+      "Farming": "https://i.postimg.cc/Jhcsw1rD/Farming.webp",
+      "Firemaking": "https://i.postimg.cc/cJMvqsxt/Firemaking.webp",
+      "Fishing": "https://i.postimg.cc/3wCkMK8D/Fishing.webp",
+      "Fletching": "https://i.postimg.cc/Jhcsw1rX/Fletching.webp",
+      "Herblore": "https://i.postimg.cc/Jhcsw1rJ/Herblore.webp",
+      "Hunter": "https://i.postimg.cc/HL4rGpYX/Hunter.webp",
+      "Invention": "https://i.postimg.cc/vmL4RQY5/Invention.webp",
+      "Magic": "https://i.postimg.cc/BvcjWqSx/Magic.webp",
+      "Mining": "https://i.postimg.cc/R0QWrMS7/Mining.webp",
+      "Prayer": "https://i.postimg.cc/TPqK8Rdj/Prayer.webp",
+      "Ranged": "https://i.postimg.cc/d0mhMqsj/Ranged.webp",
+      "Runecrafting": "https://i.postimg.cc/XvcrMVj8/Runecrafting.webp",
+      "Slayer": "https://i.postimg.cc/PqzCGtXy/Slayer.webp",
+      "Smithing": "https://i.postimg.cc/g0qx9Yz4/Smithing.webp",
+      "Strength": "https://i.postimg.cc/hGbXFSDp/Strength.webp",
+      "Summoning": "https://i.postimg.cc/k5F2rnJT/Summoning.webp",
+      "Thieving": "https://i.postimg.cc/hGbXFSDC/Thieving.webp",
+      "Woodcutting": "https://i.postimg.cc/nLYX8HFR/Woodcutting.webp"
+    };
+    
+    const rerollIcon = "https://emoji.gg/assets/emoji/6300_scapedance.gif";
+
+    const translations = {
+      en: {
+        "welcome-title": "ROLLASKILLSCAPE",
+        "intro": "Tired of training the same skills? Not sure what to do next? <br>Let randomness spice up your adventure—roll your next skill and jump in!",
+        "how_to": "How To Play:",
+        "choose_mode": "Choose a mode—Click \"game mode\" and choose time or level",
+        "roll_skill": "Roll a skill—Click \"Roll a skill\" and watch the magic happen",
+        "train_skill": "Train that skill—Stick with it until you've completed the task rolled",
+        "why_play": "Why Play?",
+        "rediscover": "Rediscover old skills you might have neglected.",
+        "break_cycle": "Break the cycle of always training the same thing.",
+        "make_fun": "Make skilling sessions more unpredictable and fun.",
+        "reroll": "Re-RollaSkill",
+        "reroll_desc": "Maybe grab a drink? grab something to eat? do some house work? or just simply Re-RollaSkill",
+        "ready": "Ready to Roll A Skill? Click \"Let's Roll\"",
+        "lets_roll": "Let's Roll!",
+        "welcome_game": "Welcome adventurer!<br> Roll your fate, train your skill, and let destiny dictate your grind!",
+        "select_mode": "Choose a game mode:",
+        "roll_skill_btn": "Roll A Skill",
+        "clear_history_btn": "Clear roll list",
+        "back_to_Rules": "Back to Welcome",
+        "roll_history": "Roll History (last 10)",
+        "no_rolls": "<em>No previous rolls yet.</em>",
+      },
+      es: {
+        "welcome-title": "ROLLASKILLSCAPE",
+        "intro": "¿Cansado de entrenar las mismas habilidades? ¿No sabes qué hacer después? <br>Deja que la aleatoriedad anime tu aventura—¡gira para tu próxima habilidad y lánzate!",
+        "how_to": "Cómo jugar:",
+        "choose_mode": "Elige un modo—Haz clic en \"modo de juego\" y elige tiempo o nivel",
+        "roll_skill": "Gira una habilidad—Haz clic en \"Girar una habilidad\" y observa la magia",
+        "train_skill": "Entrena esa habilidad—Quédate con ella hasta que completes la tarea elegida",
+        "why_play": "¿Por qué jugar?",
+        "rediscover": "Redescubre habilidades antiguas que quizás hayas descuidado.",
+        "break_cycle": "Rompe el ciclo de entrenar siempre lo mismo.",
+        "make_fun": "Haz que las sesiones de habilidades sean más impredecibles y divertidas.",
+        "reroll": "¿Repetir lanzamiento?",
+        "reroll_desc": "¿Tal vez tomar una bebida? ¿Comer algo? ¿Hacer algunas tareas domésticas? ¿O simplemente Re-RollaSkill?",
+        "ready": "¿Listo para lanzar? Haz clic en \"¡Vamos a lanzar!\"",
+        "lets_roll": "¡Vamos a lanzar!",
+        "welcome_game": "¡Bienvenido aventurero!<br> Lanza tu destino, entrena tu habilidad y deja que el destino dirija tu entrenamiento!",
+        "select_mode": "Elige un modo de juego",
+        "roll_skill_btn": "Girar una habilidad",
+        "clear_history_btn": "Borrar historial",
+        "back_to_Rules": "Volver a inicio",
+        "roll_history": "Historial de lanzamientos (últimos 10)",
+        "no_rolls": "Aún no hay lanzamientos previos.",
+      },
+      fr: {
+        "welcome-title": "ROLLASKILLSCAPE",
+        "intro": "Marre de toujours entraîner les mêmes compétences ? Vous ne savez pas quoi faire ensuite ? <br>Laissez le hasard pimenter votre aventure—lancez votre prochaine compétence et lancez-vous!",
+        "how_to": "Comment jouer :",
+        "choose_mode": "Choisissez un mode—Cliquez sur \"mode de jeu\" et choisissez temps ou niveau",
+        "roll_skill": "Roulez une compétence—Cliquez sur \"Rouler une compétence\" et regardez la magie opérer",
+        "train_skill": "Entraînez cette compétence—Continuez jusqu'à avoir complété la tâche tirée au sort",
+        "why_play": "Pourquoi jouer ?",
+        "rediscover": "Redécouvrez des compétences que vous avez peut-être négligées.",
+        "break_cycle": "Brisez le cycle de toujours entraîner la même chose.",
+        "make_fun": "Rendez les sessions d'entraînement plus imprévisibles et amusantes.",
+        "reroll": "Relancer ?",
+        "reroll_desc": "Peut-être prendre un verre ? Manger quelque chose ? Faire un peu de ménage ? Ou simplement Re-RollaSkill.",
+        "ready": "Prêt à lancer ? Cliquez sur \"Lancer !\"",
+        "lets_roll": "Lancer !",
+        "welcome_game": "Bienvenue aventurier !<br> Lancez votre destin, entraînez votre compétence et laissez le hasard guider votre grind !",
+        "select_mode": "Choisissez un mode de jeu :",
+        "roll_skill_btn": "Rouler une compétence",
+        "clear_history_btn": "Effacer l'historique",
+        "back_to_Rules": "Retour à l'accueil",
+        "roll_history": "Historique des lancers (10 derniers)",
+        "no_rolls": "Pas de lancers précédents.",
+      },
+      est: {
+        "welcome-title": "ROLLASKILLSCAPE",
+        "intro": "Väsinud samade oskuste treenimisest? Ei tea, mida järgmisena teha? <br>Lase juhusel oma seiklust vürtsitada—viska järgmine oskus ja asu tegutsema!",
+        "how_to": "Kuidas mängida:",
+        "choose_mode": "Vali režiim—Klõpsa \"mängurežiim\" ja vali aeg või tase",
+        "roll_skill": "Viska oskus—Klõpsa \"Viska oskus\" ja vaata maagia sündi",
+        "train_skill": "Treenige see oskus—Jätka, kuni ülesanne on täidetud",
+        "why_play": "Miks mängida?",
+        "rediscover": "Avasta ununenud oskuseid uuesti.",
+        "break_cycle": "Murra rutiin, treeni midagi muud.",
+        "make_fun": "Muuda oskuste treenimine ettearvamatumaks ja lõbusamaks.",
+        "reroll": "Uuesti viskamine?",
+        "reroll_desc": "Võib-olla võtad midagi juua? Sööd midagi? Teed natuke majapidamistöid? Või lihtsalt Re-RollaSkill.",
+        "ready": "Oled valmis? Klõpsa \"Viska\"",
+        "lets_roll": "Viska!",
+        "welcome_game": "Tere tulemast, seikleja!<br> Vii end uude seiklusse, treeni oskuseid ja lase juhusel määrata järgmine grind!",
+        "select_mode": "Vali mängurežiim:",
+        "roll_skill_btn": "Viska oskus",
+        "clear_history_btn": "Kustuta nimekiri",
+        "back_to_Rules": "Tagasi algusesse",
+        "roll_history": "Viimased visked (10)",
+        "no_rolls": "Eelmisi viskeid pole.",
+      },
+      ger: {
+        "welcome-title": "ROLLASKILLSCAPE",
+        "intro": "Müde, immer die gleichen Fertigkeiten zu trainieren? Nicht sicher, was als Nächstes kommt? <br>Lass Zufall dein Abenteuer würzen—rolle deine nächste Fertigkeit und leg los!",
+        "how_to": "So spielst du:",
+        "choose_mode": "Wähle einen Modus—Klicke auf \"Spielmodus\" und wähle Zeit oder Level",
+        "roll_skill": "Rolle eine Fertigkeit—Klicke auf \"Fertigkeit rollen\" und erlebe die Magie",
+        "train_skill": "Trainiere diese Fertigkeit—Bleib dabei, bis du die Aufgabe abgeschlossen hast",
+        "why_play": "Warum spielen?",
+        "rediscover": "Entdecke alte Fertigkeiten neu, die du vielleicht vernachlässigt hast.",
+        "break_cycle": "Durchbreche den Zyklus, immer die gleiche Sache zu trainieren.",
+        "make_fun": "Mach das Training unvorhersehbarer und spaßiger.",
+        "reroll": "Nochmal rollen?",
+        "reroll_desc": "Vielleicht etwas trinken? Etwas essen? Etwas Hausarbeit erledigen? Oder einfach Re-RollaSkill.",
+        "ready": "Bereit zu rollen? Klicke \"Los geht's\"",
+        "lets_roll": "Los geht's!",
+        "welcome_game": "Willkommen Abenteurer!<br> Rolle dein Schicksal, trainiere deine Fertigkeit, und lass das Schicksal dein Training bestimmen!",
+        "select_mode": "Wähle einen Spielmodus:",
+        "roll_skill_btn": "Fertigkeit rollen",
+        "clear_history_btn": "Liste löschen",
+        "back_to_Rules": "Zurück zum Start",
+        "roll_history": "Wurfhistorie (letzte 10)",
+        "no_rolls": "Bisher keine Würfe.",
+      }
+    };
+
+    function setLanguage(lang) {
+      const dict = translations[lang] || translations.en;
+      [
+        "welcome-title", "intro",
+        "how_to", "choose_mode", "roll_skill", "train_skill",
+        "why_play", "rediscover", "break_cycle", "make_fun",
+        "reroll", "reroll_desc", "ready",
+        "lets_roll", "welcome_game", "select_mode",
+        "roll_skill_btn", "clear_history_btn",
+        "back_to_Rules", "roll_history"
+      ].forEach(function(id) {
+        const element = document.getElementById(id);
+        if(element) {
+          element.innerHTML = dict[id] || '';
+        }
+      });
+      renderHistory();
+      document.getElementById("roll-btn").setAttribute('aria-label', dict.roll_skill_btn);
+      document.getElementById("clear-btn").setAttribute('aria-label', dict.clear_history_btn);
+      document.getElementById("back-btn").setAttribute('aria-label', dict.back_to_Rules);
+      localStorage.setItem('rollaLang', lang);
+    }
+
+    // Theme switch logic
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('rollaTheme', theme);
+    }
+    
+    document.getElementById('theme-select').addEventListener('change', function() {
+      applyTheme(this.value);
+    });
+    
+    const savedTheme = localStorage.getItem('rollaTheme') || 'dark';
+    document.getElementById('theme-select').value = savedTheme;
+    applyTheme(savedTheme);
+
+    // === Rolling Animation Function ===
+    function animateSkillRoll(duration, finalCallback) {
+      const output = document.getElementById('output');
+      output.classList.add('rolling');
+      let ticks = 0;
+      const totalTicks = duration / 80;
+      const lang = document.getElementById('language-select').value;
+      const dict = translations[lang] || translations.en;
+      const rerollText = dict.reroll;
+      const rerollDesc = dict.reroll_desc;
+      const rerollHtml = `<div style="text-align: center;"><img src="${rerollIcon}" alt="Re-RollaSkill" style="width:52px;height:52px;vertical-align:middle;margin-bottom:5px;"><br> <strong>${rerollText}</strong><br>${rerollDesc}</div>`;
+
+      const interval = setInterval(() => {
+        const skill = skills[Math.floor(Math.random() * skills.length)];
+        // Center the skill icon and text during animation
+        output.innerHTML = `<div class="skill-display"><img src="${skillIcons[skill]}" class="skill-icon" alt="${skill}"> ${skill}</div>`;
+        ticks++;
+        if (ticks > totalTicks) {
+          clearInterval(interval);
+          output.classList.remove('rolling');
+          finalCallback(rerollHtml);
+        }
+      }, 80);
+    }
+
+    function getRandomSkill() {
+      const index = Math.floor(Math.random() * skills.length);
+      return skills[index];
+    }
+
+    function rollSkillDisplay(skill) {
+      return `<span class="skill-display"><img src="${skillIcons[skill]}" class="skill-icon" alt="${skill}"> ${skill}</span>`;
+    }
+
+    // --- Modular Time/Level Rolling ---
+    function rollTime() {
+      const t = Math.floor(Math.random()*6)+1;
+      switch (t) {
+        case 1: return "Skill for 30 minutes";
+        case 2: return "Skill for 1 hour";
+        case 3: return "Skill for 1 hour 30 mins";
+        case 4: return "Skill for 2 hours";
+        case 5: return "Skill until next level";
+        case 6: return "Re-roll (6)";
+        default: return "Skill for ??";
+      }
+    }
+    
+    function rollLevel() {
+      const l = Math.floor(Math.random()*6)+1;
+      if (l === 6) return "Re-roll (6)";
+      return `Gain ${l} level${l>1?"s":""} before next roll`;
+    }
+
+    function saveToHistory(skill, task, mode) {
+      const historyEntry = {
+        time: new Date().toLocaleTimeString(),
+        skill, task, mode
+      };
+      let history = [];
+      try { 
+        history = JSON.parse(localStorage.getItem('rollaHistory')) || []; 
+      } catch { 
+        history = []; 
+      }
+      history.unshift(historyEntry);
+      if (history.length > 10) history = history.slice(0,10);
+      localStorage.setItem('rollaHistory', JSON.stringify(history));
+      renderHistory();
+    }
+
+    function renderHistory() {
+      let history = [];
+      try { 
+        history = JSON.parse(localStorage.getItem('rollaHistory')) || []; 
+      } catch { 
+        history = []; 
+      }
+      const container = document.getElementById('history');
+      const lang = document.getElementById('language-select').value;
+      const dict = translations[lang] || translations.en;
+      
+      if (history.length === 0) {
+        container.innerHTML = dict.no_rolls;
+        return;
+      }
+      
+      container.innerHTML = "<strong>" + dict.roll_history + "</strong><br><br>" +
+        history.map(h =>
+          h.skill === "Re-RollaSkill" ?
+            `[${h.time}] <img src="${rerollIcon}" alt="Re-RollaSkill" style="width:24px;height:24px;vertical-align:middle;"> Re-RollaSkill`
+          :
+            `[${h.time}] <img src="${skillIcons[h.skill]||''}" class="skill-icon" style="width:26px;height:26px;vertical-align:middle;"> ${h.skill} → ${h.task} (${h.mode === "time" ? "T" : "L"})`
+        ).join("<br>");
+    }
+
+    function clearHistory() {
+      localStorage.removeItem('rollaHistory');
+      renderHistory();
+    }
+
+    // === Main Roll Logic with Animation ===
+    function rollAll() {
+      const mode = document.getElementById('modeSelect').value;
+      animateSkillRoll(1700, (rerollHtml) => {
+        const skill = getRandomSkill();
+        let task = (mode === "time") ? rollTime() : rollLevel();
+        
+        if (task === "Re-roll (6)") {
+          document.getElementById("output").innerHTML = rerollHtml;
+          saveToHistory("Re-RollaSkill", "", mode);
+          return;
+        }
+        
+        const result = `<p>Skill ➜ <strong>${rollSkillDisplay(skill)}</strong></p> <p>${mode === "time" ? "Time" : "Levels"} ➜ <strong>${task}</strong></p> <hr> <p>💡 <em>Train ${skill} → ${task}</em></p>`;
+        document.getElementById("output").innerHTML = result;
+        saveToHistory(skill, task, mode);
+      });
+    }
+
+    // === Accessibility: Keyboard Navigation Support ===
+    document.addEventListener("keydown", function(e) {
+      const gamePanelVisible = document.getElementById("game-panel").style.display === "block";
+      if (gamePanelVisible && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "SELECT") {
+        if (e.key === "r" || e.key === "Enter") {
+          e.preventDefault();
+          rollAll();
+        }
+        if (e.key === "h") {
+          e.preventDefault();
+          clearHistory();
+        }
+        if (e.key === "Escape") {
+          e.preventDefault();
+          backToWelcome();
+        }
+      }
+    });
+    
+    document.getElementById("lets-roll-btn").tabIndex = 0;
+
+    // === Show / Hide Panels ===
+    function showGame() {
+      document.getElementById('welcome-screen').style.display = 'none';
+      document.getElementById('game-panel').style.display = 'block';
+      document.getElementById('roll-btn').focus();
+    }
+    
+    function backToWelcome() {
+      document.getElementById('game-panel').style.display = 'none';
+      document.getElementById('welcome-screen').style.display = 'flex';
+      document.getElementById('lets-roll-btn').focus();
+    }
+
+    // === Language Init ===
+    const savedLang = localStorage.getItem('rollaLang') || 'en';
+    document.getElementById('language-select').value = savedLang;
+    setLanguage(savedLang);
+    
+    document.getElementById('language-select').addEventListener('change', function() {
+      setLanguage(this.value);
+    });
+    
+    renderHistory();
+  </script>
+</body>
+</html>
