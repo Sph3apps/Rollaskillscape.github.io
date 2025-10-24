@@ -33,7 +33,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     build,
-    base: '/Rollaskillscape.github.io/',
+    base: '/',
     esbuild,
     define,
     resolve: {
@@ -46,5 +46,6 @@ export default defineConfig(({ mode }) => {
     },
   }
 })
+
 
 
