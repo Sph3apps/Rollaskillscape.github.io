@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import WelcomeScreen from './components/WelcomeScreen.jsx'
 import GamePanel from './components/GamePanel.jsx'
-import Navigation from './components/Navigation.js'
+import Navigation from './components/Navigation.jsx'
 import translations  from './utils/translations.js'
 import { skills, skillIcons } from './utils/skills'
 
