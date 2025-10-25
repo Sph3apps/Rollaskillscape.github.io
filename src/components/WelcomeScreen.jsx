@@ -44,7 +44,7 @@ const WelcomeScreen = ({ onStartGame, t }) => {
       </div>
       
       <footer>
-        © 2025 RollaSkillScape — Crafted for Adventure
+        RollaSkillScape — Crafted and designed by Discord: @_.chars._
       </footer>
     </>
   )
