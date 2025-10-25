@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import WelcomeScreen from './components/WelcomeScreen'
 import GamePanel from './components/GamePanel'
 import Navigation from './components/Navigation'
-import { translations } from './utils/translations'
+import translations  from './utils/translations'
 import { skills, skillIcons } from './utils/skills'
 
 function App() {
