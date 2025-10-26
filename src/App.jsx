@@ -3,7 +3,7 @@ import WelcomeScreen from './components/WelcomeScreen.jsx'
 import GamePanel from './components/GamePanel.jsx'
 import Navigation from './components/Navigation.jsx'
 import { translations }  from './components/utils/translations.js'
-import { skills, skillIcons } from './components/utils/skills'
+import { skills, skillIcons } from './components/utils/skills.jsx'
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome')
