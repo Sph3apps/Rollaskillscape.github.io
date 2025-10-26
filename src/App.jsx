@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import WelcomeScreen from './components/WelcomeScreen.jsx'
-import GamePanel from './components/GamePanel.jsx'
-import Navigation from './components/Navigation.jsx'
-import { translations }  from './utils/translations.js'
-import { skills, skillIcons } from './utils/skills'
+import WelcomeScreen from '.src/components/WelcomeScreen.jsx'
+import GamePanel from '.src/components/GamePanel.jsx'
+import Navigation from '.src/components/Navigation.jsx'
+import { translations }  from '.src/components/utils/translations.js'
+import { skills, skillIcons } from '.src/components/utils/skills'
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome')
