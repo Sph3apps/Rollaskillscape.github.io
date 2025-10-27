@@ -2,6 +2,7 @@
   "name": "rollaskillscape",
   "private": true,
   "version": "1.0.0",
+  "homepage": "https://Sph3apps.github.io/rollaskillscape",
   "type": "module",
   "scripts": {
     "dev": "vite",
