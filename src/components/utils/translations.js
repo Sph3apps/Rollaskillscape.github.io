@@ -1,6 +1,6 @@
 export const translations = {
   en: {
-    "intro": "Tired of training the same skills? Not sure what to do next?<br>Let randomness spice up your adventure—roll your next skill and jump in!",
+    "intro": "Tired of training the same skills? Not sure what to do next? Let randomness spice up your adventure—roll your next skill and jump in!",
     "how_to": "How To Play:",
     "choose_mode": "Choose a mode—Click \"game mode\" and choose time or level",
     "roll_skill": "Roll a skill—Click \"Roll a skill\" and watch the magic happen",
@@ -22,7 +22,7 @@ export const translations = {
     "no_rolls": "No previous rolls yet."
   },
   es: {
-    "intro": "¿Cansado de entrenar las mismas habilidades? ¿No sabes qué hacer después?<br>Deja que la aleatoriedad anime tu aventura—¡gira para tu próxima habilidad y lánzate!",
+    "intro": "¿Cansado de entrenar las mismas habilidades? ¿No sabes qué hacer después? Deja que la aleatoriedad anime tu aventura—¡gira para tu próxima habilidad y lánzate!",
     "how_to": "Cómo jugar:",
     "choose_mode": "Elige un modo—Haz clic en \"modo de juego\" y elige tiempo o nivel",
     "roll_skill": "Gira una habilidad—Haz clic en \"Girar una habilidad\" y observa la magia",
@@ -44,7 +44,7 @@ export const translations = {
     "no_rolls": "Aún no hay lanzamientos previos."
   },
   fr: {
-    "intro": "Marre de toujours entraîner les mêmes compétences ? Vous ne savez pas quoi faire ensuite ?<br>Laissez le hasard pimenter votre aventure—lancez votre prochaine compétence et lancez-vous!",
+    "intro": "Marre de toujours entraîner les mêmes compétences ? Vous ne savez pas quoi faire ensuite ? Laissez le hasard pimenter votre aventure—lancez votre prochaine compétence et lancez-vous!",
     "how_to": "Comment jouer :",
     "choose_mode": "Choisissez un mode—Cliquez sur \"mode de jeu\" et choisissez temps ou niveau",
     "roll_skill": "Roulez une compétence—Cliquez sur \"Rouler une compétence\" et regardez la magie opérer",
@@ -66,7 +66,7 @@ export const translations = {
     "no_rolls": "Pas de lancers précédents."
   },
   est: {
-    "intro": "Väsinud samade oskuste treenimisest? Ei tea, mida järgmisena teha?<br>Lase juhusel oma seiklust vürtsitada—viska järgmine oskus ja asu tegutsema!",
+    "intro": "Väsinud samade oskuste treenimisest? Ei tea, mida järgmisena teha? Lase juhusel oma seiklust vürtsitada—viska järgmine oskus ja asu tegutsema!",
     "how_to": "Kuidas mängida:",
     "choose_mode": "Vali režiim—Klõpsa \"mängurežiim\" ja vali aeg või tase",
     "roll_skill": "Viska oskus—Klõpsa \"Viska oskus\" ja vaata maagia sündi",
@@ -88,7 +88,7 @@ export const translations = {
     "no_rolls": "Eelmisi viskeid pole."
   },
   ger: {
-    "intro": "Müde, immer die gleichen Fertigkeiten zu trainieren? Nicht sicher, was als Nächstes kommt?<br>Lass Zufall dein Abenteuer würzen—rolle deine nächste Fertigkeit und leg los!",
+    "intro": "Müde, immer die gleichen Fertigkeiten zu trainieren? Nicht sicher, was als Nächstes kommt? Lass Zufall dein Abenteuer würzen—rolle deine nächste Fertigkeit und leg los!",
     "how_to": "So spielst du:",
     "choose_mode": "Wähle einen Modus—Klicke auf \"Spielmodus\" und wähle Zeit oder Level",
     "roll_skill": "Rolle eine Fertigkeit—Klicke auf \"Fertigkeit rollen\" und erlebe die Magie",
