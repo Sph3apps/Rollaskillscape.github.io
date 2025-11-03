@@ -2,13 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import WelcomeScreen from './components/WelcomeScreen.jsx';
 import GamePanel from './components/GamePanel.jsx';
-import GamePanel2 from './components/GamePanel2.jsx'; // NEW: OSRS panel, fully separate file!
+import GamePanel2 from './components/GamePanel2.jsx';
 import Navigation from './components/Navigation.jsx';
 import { translations } from './components/utils/translations.js';
 import { skills as rs3Skills, skillIcons as rs3Icons } from './components/utils/skills.jsx';
 import { skills as osrsSkills, skillIcons as osrsIcons } from './components/utils/osrsSkills.jsx';
 
-// YOU KEEP all original state, logic, and imports:
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
   const [language, setLanguage] = useState('en');
@@ -68,8 +67,6 @@ function App() {
   };
   const t = (key) => translations[language]?.[key] || translations.en[key] || key;
 
-  // !!!! KEEPING YOUR OLD COMPONENT LOGIC AND STATE CONTROL EXACTLY AS SENT !!!!
-
   return (
     <div className="app">
       <Navigation
@@ -90,10 +87,12 @@ function App() {
         t={t}
       />
       <div className="page-container" ref={contentRef}>
-        <nav>
-          <Link to="/">RuneScape 3</Link> | <Link to="/osrs">OSRS</Link>
+        <nav className="mb-4">
+          <Link to="/" className="mr-4 text-yellow-400 hover:underline">RS3</Link>
+          <Link to="/osrs" className="text-yellow-400 hover:underline">OSRS</Link>
         </nav>
         <Routes>
+          {/* Main RS3 Route */}
           <Route
             path="/"
             element={
@@ -110,6 +109,7 @@ function App() {
                   />
             }
           />
+          {/* OSRS Route */}
           <Route
             path="/osrs"
             element={
