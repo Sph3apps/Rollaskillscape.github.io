@@ -6,7 +6,7 @@ import GamePanel2 from './components/GamePanel2.jsx';
 import Navigation from './components/Navigation.jsx';
 import { translations } from './components/utils/translations.js';
 import { skills as rs3Skills, skillIcons as rs3Icons } from './components/utils/skills.jsx';
-import { skills as osrsSkills, skillIcons as osrsIcons } from './components/utils/OsrsSkills.jsx';
+import { skills as osrsSkills, skillIcons as osrsIcons } from './components/utils/osrsskills.jsx';
 
 function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
