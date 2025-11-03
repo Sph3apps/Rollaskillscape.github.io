@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // ✅ Added import for navigation
 
 const GamePanel2 = ({
   onBackToWelcome,
@@ -9,63 +10,62 @@ const GamePanel2 = ({
   skillIcons,
   t
 }) => {
-  const [mode, setMode] = useState('time')
-  const [output, setOutput] = useState('')
-  const [isRolling, setIsRolling] = useState(false)
+  const [mode, setMode] = useState('time');
+  const [output, setOutput] = useState('');
+  const [isRolling, setIsRolling] = useState(false);
 
-  const rerollIcon = "https://emoji.gg/assets/emoji/6300_scapedance.gif"
+  const rerollIcon = "https://emoji.gg/assets/emoji/6300_scapedance.gif";
 
   const rollTime = () => {
-    const t = Math.floor(Math.random() * 6) + 1
+    const t = Math.floor(Math.random() * 6) + 1;
     switch (t) {
-      case 1: return "Skill for 30 minutes"
-      case 2: return "Skill for 1 hour"
-      case 3: return "Skill for 1 hour 30 mins"
-      case 4: return "Skill for 2 hours"
-      case 5: return "Skill until next level"
-      case 6: return "Re-roll (6)"
-      default: return "Skill for ??"
+      case 1: return "Skill for 30 minutes";
+      case 2: return "Skill for 1 hour";
+      case 3: return "Skill for 1 hour 30 mins";
+      case 4: return "Skill for 2 hours";
+      case 5: return "Skill until next level";
+      case 6: return "Re-roll (6)";
+      default: return "Skill for ??";
     }
-  }
+  };
 
   const rollLevel = () => {
-    const l = Math.floor(Math.random() * 6) + 1
-    if (l === 6) return "Re-roll (6)"
-    return `Gain ${l} level${l > 1 ? "s" : ""} before next roll`
-  }
+    const l = Math.floor(Math.random() * 6) + 1;
+    if (l === 6) return "Re-roll (6)";
+    return `Gain ${l} level${l > 1 ? "s" : ""} before next roll`;
+  };
 
   const getRandomSkill = () => {
-    const index = Math.floor(Math.random() * skills.length)
-    return skills[index]
-  }
+    const index = Math.floor(Math.random() * skills.length);
+    return skills[index];
+  };
 
   const animateSkillRoll = (duration, finalCallback) => {
-    setIsRolling(true)
-    let ticks = 0
-    const totalTicks = duration / 80
+    setIsRolling(true);
+    let ticks = 0;
+    const totalTicks = duration / 80;
 
     const interval = setInterval(() => {
-      const skill = getRandomSkill()
+      const skill = getRandomSkill();
       setOutput(
         `<div class="skill-display">
           <img src="${skillIcons[skill]}" class="skill-icon" alt="${skill}"> 
           ${skill}
         </div>`
-      )
-      ticks++
-      
+      );
+      ticks++;
       if (ticks > totalTicks) {
-        clearInterval(interval)
-        setIsRolling(false)
-        finalCallback()
+        clearInterval(interval);
+        setIsRolling(false);
+        finalCallback();
       }
-    }, 80)
-  }
+    }, 80);
+  };
 
   const rollAll = () => {
     animateSkillRoll(1700, () => {
-      const skill = getRandomSkill()
-      let task = (mode === "time") ? rollTime() : rollLevel()
+      const skill = getRandomSkill();
+      let task = (mode === "time") ? rollTime() : rollLevel();
 
       if (task === "Re-roll (6)") {
         const rerollHtml = `
@@ -76,10 +76,10 @@ const GamePanel2 = ({
             <br>
             ${t('reroll_desc')}
           </div>
-        `
-        setOutput(rerollHtml)
-        onSaveToHistory("Re-RollaSkill", "", mode)
-        return
+        `;
+        setOutput(rerollHtml);
+        onSaveToHistory("Re-RollaSkill", "", mode);
+        return;
       }
 
       const result = `
@@ -92,15 +92,15 @@ const GamePanel2 = ({
         <p>${mode === "time" ? "Time" : "Levels"} ➜ <strong>${task}</strong></p> 
         <hr> 
         <p>💡 <em>Train ${skill} → ${task}</em></p>
-      `
-      setOutput(result)
-      onSaveToHistory(skill, task, mode)
-    })
-  }
+      `;
+      setOutput(result);
+      onSaveToHistory(skill, task, mode);
+    });
+  };
 
   const renderHistory = () => {
     if (history.length === 0) {
-      return <em>{t('no_rolls')}</em>
+      return <em>{t('no_rolls')}</em>;
     }
 
     return (
@@ -117,13 +117,13 @@ const GamePanel2 = ({
           </div>
         ))}
       </>
-    )
-  }
+    );
+  };
 
   return (
     <div className="glass-card game-panel active">
       <p dangerouslySetInnerHTML={{ __html: t('welcome_game') }} />
-      
+
       <label htmlFor="modeSelect">{t('select_mode')}</label>
       <select
         id="modeSelect"
@@ -133,31 +133,40 @@ const GamePanel2 = ({
         <option value="time">Time Mode</option>
         <option value="level">Level Mode</option>
       </select>
-      
+
       <br />
-      
+
       <button onClick={rollAll} disabled={isRolling}>
         {t('roll_skill_btn')}
       </button>
-      
+
       <button onClick={onClearHistory}>
         {t('clear_history_btn')}
       </button>
-      
+
       <div
         className={`result ${isRolling ? 'rolling' : ''}`}
         dangerouslySetInnerHTML={{ __html: output }}
       />
-      
+
       <div className="history">
         {renderHistory()}
       </div>
-      
-      <button onClick={onBackToWelcome} style={{ marginTop: '15px' }}>
-        {t('back_to_Rules')}
-      </button>
-    </div>
-  )
-}
 
-export default GamePanel
+      {/* Bottom navigation buttons */}
+      <div style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
+        <button onClick={onBackToWelcome}>
+          {t('back_to_Rules')}
+        </button>
+        <Link
+          to="/"
+          className="px-6 py-3 bg-yellow-600 rounded-xl hover:bg-yellow-700 transition"
+        >
+          Back to RS3
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default GamePanel2;
