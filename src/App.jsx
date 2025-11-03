@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import WelcomeScreen from './components/WelcomeScreen.jsx';
 import GamePanel from './components/GamePanel.jsx';
-import GamePanel2 from './components/GamePanel2.jsx';
+import GamePanel2 from './components/Gamepanel2.jsx';
 import Navigation from './components/Navigation.jsx';
 import { translations } from './components/utils/translations.js';
 import { skills as rs3Skills, skillIcons as rs3Icons } from './components/utils/skills.jsx';
