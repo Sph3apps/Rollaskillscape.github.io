@@ -17,23 +17,26 @@ const GamePanel = ({
   const rerollIcon = "https://emoji.gg/assets/emoji/6300_scapedance.gif";
 
   const rollTime = () => {
-    const t = Math.floor(Math.random() * 6) + 1;
-    switch (t) {
-      case 1: return "Skill for 30 minutes";
-      case 2: return "Skill for 1 hour";
-      case 3: return "Skill for 1 hour 30 mins";
-      case 4: return "Skill for 2 hours";
-      case 5: return "Skill until next level";
-      case 6: return "Re-roll (6)";
-      default: return "Skill for ??";
-    }
-  };
+  const t_val = Math.floor(Math.random() * 6) + 1;
+  switch (t_val) {
+    case 1: return t('skill_30min');
+    case 2: return t('skill_1hour');
+    case 3: return t('skill_1hour30');
+    case 4: return t('skill_2hours');
+    case 5: return t('skill_next_level');
+    case 6: return t('reroll_result');
+    default: return "Skill for ??";
+  }
+};
 
-  const rollLevel = () => {
-    const l = Math.floor(Math.random() * 6) + 1;
-    if (l === 6) return "Re-roll (6)";
-    return `Gain ${l} level${l > 1 ? "s" : ""} before next roll`;
-  };
+
+ const rollLevel = () => {
+  const l = Math.floor(Math.random() * 6) + 1;
+  if (l === 6) return t('reroll_result');
+  const plural = l > 1 ? 's' : '';
+  return t('gain_levels').replace('{levels}', l).replace('{plural}', plural);
+};
+
 
   const getRandomSkill = () => {
     const index = Math.floor(Math.random() * skills.length);
