@@ -94,10 +94,12 @@ const result = `
   <p>${mode === "time" ? t('time_label') : t('levels_label')} ➜ <strong>${task}</strong></p> 
   <hr> 
   <p>💡 <em>${t('train_text')} ${skill} → ${task}</em></p>
-`;
-  });  
+`;  
+    setOutput(result);
+    onSaveToHistory(skill, task, mode);
+  });
 };
-
+  
 }
   const renderHistory = () => {
     if (history.length === 0) {
