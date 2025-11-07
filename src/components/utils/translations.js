@@ -20,6 +20,17 @@ export const translations = {
     "back_to_Rules": "Back to Welcome",
     "roll_history": "Roll History (last 10)",
     "no_rolls": "No previous rolls yet."
+    "skill_30min": "Skill for 30 minutes",
+    "skill_1hour": "Skill for 1 hour",
+    "skill_1hour30": "Skill for 1 hour 30 mins",
+    "skill_2hours": "Skill for 2 hours",
+    "skill_next_level": "Skill until next level",
+    "reroll_result": "Re-roll (6)",
+    "gain_levels": "Gain {levels} level{plural} before next roll",
+    "time_label": "Time",
+    "levels_label": "Levels",
+    "train_text": "Train"
+
   },
   es: {
     "intro": "¿Cansado de entrenar las mismas habilidades? ¿No sabes qué hacer después? Deja que la aleatoriedad anime tu aventura—¡gira para tu próxima habilidad y lánzate!",
@@ -42,6 +53,17 @@ export const translations = {
     "back_to_Rules": "Volver a inicio",
     "roll_history": "Historial de lanzamientos (últimos 10)",
     "no_rolls": "Aún no hay lanzamientos previos."
+    "skill_30min": "Habilidad 30 minutos",
+    "skill_1hour": "Habilidad 1 hora",
+    "skill_1hour30": "Habilidad 1 hora 30 min",
+    "skill_2hours": "Habilidad 2 horas",
+    "skill_next_level": "Habilidad hasta próximo nivel",
+    "reroll_result": "Relanzar (6)",
+    "gain_levels": "Gana {levels} nivel{plural} antes del próximo lanzamiento",
+    "time_label": "Tiempo",
+    "levels_label": "Niveles",
+    "train_text": "Entrena"
+
   },
   fr: {
     "intro": "Marre de toujours entraîner les mêmes compétences ? Vous ne savez pas quoi faire ensuite ? Laissez le hasard pimenter votre aventure—lancez votre prochaine compétence et lancez-vous!",
@@ -64,6 +86,17 @@ export const translations = {
     "back_to_Rules": "Retour à l'accueil",
     "roll_history": "Historique des lancers (10 derniers)",
     "no_rolls": "Pas de lancers précédents."
+    "skill_30min": "Compétence 30 minutes",
+    "skill_1hour": "Compétence 1 heure",
+    "skill_1hour30": "Compétence 1 heure 30 min",
+    "skill_2hours": "Compétence 2 heures",
+    "skill_next_level": "Compétence jusqu'au prochain niveau",
+    "reroll_result": "Relancer (6)",
+    "gain_levels": "Gagner {levels} niveau{plural} avant le prochain lancer",
+    "time_label": "Temps",
+    "levels_label": "Niveaux",
+    "train_text": "Entraînez"
+
   },
   est: {
     "intro": "Väsinud samade oskuste treenimisest? Ei tea, mida järgmisena teha? Lase juhusel oma seiklust vürtsitada—viska järgmine oskus ja asu tegutsema!",
@@ -86,6 +119,17 @@ export const translations = {
     "back_to_Rules": "Tagasi algusesse",
     "roll_history": "Viimased visked (10)",
     "no_rolls": "Eelmisi viskeid pole."
+    "skill_30min": "Oskus 30 minutit",
+    "skill_1hour": "Oskus 1 tund",
+    "skill_1hour30": "Oskus 1 tund 30 min",
+    "skill_2hours": "Oskus 2 tundi",
+    "skill_next_level": "Oskus järgmise tasemeni",
+    "reroll_result": "Uuesti viskamine (6)",
+    "gain_levels": "Saada {levels} tase{plural} enne järgmist viskamist",
+    "time_label": "Aeg",
+    "levels_label": "Tasemed",
+    "train_text": "Treeni"
+
   },
   ger: {
     "intro": "Müde, immer die gleichen Fertigkeiten zu trainieren? Nicht sicher, was als Nächstes kommt? Lass Zufall dein Abenteuer würzen—rolle deine nächste Fertigkeit und leg los!",
@@ -108,5 +152,16 @@ export const translations = {
     "back_to_Rules": "Zurück zum Start",
     "roll_history": "Wurfhistorie (letzte 10)",
     "no_rolls": "Bisher keine Würfe."
+    "skill_30min": "Fertigkeit 30 Minuten",
+    "skill_1hour": "Fertigkeit 1 Stunde",
+    "skill_1hour30": "Fertigkeit 1 Stunde 30 Min",
+    "skill_2hours": "Fertigkeit 2 Stunden",
+    "skill_next_level": "Fertigkeit bis nächstes Level",
+    "reroll_result": "Nochmal rollen (6)",
+    "gain_levels": "Gewinne {levels} Level{plural} vor dem nächsten Wurf",
+    "time_label": "Zeit",
+    "levels_label": "Level",
+    "train_text": "Trainiere"
+
   }
 }
