@@ -122,6 +122,7 @@ const result = `
     );
   };
 
+}
   return (
     <div className="glass-card game-panel active">
       <p dangerouslySetInnerHTML={{ __html: t('welcome_game') }} />
