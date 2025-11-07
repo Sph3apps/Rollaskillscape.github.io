@@ -17,26 +17,24 @@ const GamePanel = ({
   const rerollIcon = "https://emoji.gg/assets/emoji/6300_scapedance.gif";
 
   const rollTime = () => {
-  const t_val = Math.floor(Math.random() * 6) + 1;
-  switch (t_val) {
-    case 1: return t('skill_30min');
-    case 2: return t('skill_1hour');
-    case 3: return t('skill_1hour30');
-    case 4: return t('skill_2hours');
-    case 5: return t('skill_next_level');
-    case 6: return t('reroll_result');
-    default: return "Skill for ??";
-  }
-};
+    const t_val = Math.floor(Math.random() * 6) + 1;
+    switch (t_val) {
+      case 1: return t('skill_30min');
+      case 2: return t('skill_1hour');
+      case 3: return t('skill_1hour30');
+      case 4: return t('skill_2hours');
+      case 5: return t('skill_next_level');
+      case 6: return t('reroll_result');
+      default: return "Skill for ??";
+    }
+  };
 
-
- const rollLevel = () => {
-  const l = Math.floor(Math.random() * 6) + 1;
-  if (l === 6) return t('reroll_result');
-  const plural = l > 1 ? 's' : '';
-  return t('gain_levels').replace('{levels}', l).replace('{plural}', plural);
-};
-
+  const rollLevel = () => {
+    const l = Math.floor(Math.random() * 6) + 1;
+    if (l === 6) return t('reroll_result');
+    const plural = l > 1 ? 's' : '';
+    return t('gain_levels').replace('{levels}', l).replace('{plural}', plural);
+  };
 
   const getRandomSkill = () => {
     const index = Math.floor(Math.random() * skills.length);
@@ -83,28 +81,28 @@ const GamePanel = ({
         setOutput(rerollHtml);
         onSaveToHistory("Re-RollaSkill", "", mode);
         return;
+      }
 
-const result = `
-  <p>Skill ➜ <strong>
-    <span class="skill-display">
-      <img src="${skillIcons[skill]}" class="skill-icon" alt="${skill}"> 
-      ${skill}
-    </span>
-  </strong></p> 
-  <p>${mode === "time" ? t('time_label') : t('levels_label')} ➜ <strong>${task}</strong></p> 
-  <hr> 
-  <p>💡 <em>${t('train_text')} ${skill} → ${task}</em></p>
-`;  
-    setOutput(result);
-    onSaveToHistory(skill, task, mode);
-  });
-};
-  
-}
+      const result = `
+        <p>Skill ➜ <strong>
+          <span class="skill-display">
+            <img src="${skillIcons[skill]}" class="skill-icon" alt="${skill}"> 
+            ${skill}
+          </span>
+        </strong></p> 
+        <p>${mode === "time" ? t('time_label') : t('levels_label')} ➜ <strong>${task}</strong></p> 
+        <hr> 
+        <p>💡 <em>${t('train_text')} ${skill} → ${task}</em></p>
+      `;
+      setOutput(result);
+      onSaveToHistory(skill, task, mode);
+    });
+  };
+
   const renderHistory = () => {
     if (history.length === 0) {
       return <em>{t('no_rolls')}</em>;
-    };
+    }
 
     return (
       <>
@@ -122,7 +120,6 @@ const result = `
       </>
     );
   };
-
 
   return (
     <div className="glass-card game-panel active">
