@@ -85,20 +85,18 @@ const GamePanel = ({
         return;
       }
 
-      const result = `
-        <p>Skill ➜ <strong>
-          <span class="skill-display">
-            <img src="${skillIcons[skill]}" class="skill-icon" alt="${skill}"> 
-            ${skill}
-          </span>
-        </strong></p> 
-        <p>${mode === "time" ? "Time" : "Levels"} ➜ <strong>${task}</strong></p> 
-        <hr> 
-        <p>💡 <em>Train ${skill} → ${task}</em></p>
-      `;
-      setOutput(result);
-      onSaveToHistory(skill, task, mode);
-    });
+const result = `
+  <p>Skill ➜ <strong>
+    <span class="skill-display">
+      <img src="${skillIcons[skill]}" class="skill-icon" alt="${skill}"> 
+      ${skill}
+    </span>
+  </strong></p> 
+  <p>${mode === "time" ? t('time_label') : t('levels_label')} ➜ <strong>${task}</strong></p> 
+  <hr> 
+  <p>💡 <em>${t('train_text')} ${skill} → ${task}</em></p>
+`;
+      
   };
 
   const renderHistory = () => {
