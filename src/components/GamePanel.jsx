@@ -83,7 +83,6 @@ const GamePanel = ({
         setOutput(rerollHtml);
         onSaveToHistory("Re-RollaSkill", "", mode);
         return;
-      }
 
 const result = `
   <p>Skill ➜ <strong>
