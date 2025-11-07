@@ -96,7 +96,10 @@ const result = `
   <hr> 
   <p>💡 <em>${t('train_text')} ${skill} → ${task}</em></p>
 `;
+  });  
+};
 
+}
   const renderHistory = () => {
     if (history.length === 0) {
       return <em>{t('no_rolls')}</em>;
