@@ -52,7 +52,7 @@ export const translations = {
     "clear_history_btn": "Borrar historial",
     "back_to_Rules": "Volver a inicio",
     "roll_history": "Historial de lanzamientos (últimos 10)",
-    "no_rolls": "Aún no hay lanzamientos previos."
+    "no_rolls": "Aún no hay lanzamientos previos.",
     "skill_30min": "Habilidad 30 minutos",
     "skill_1hour": "Habilidad 1 hora",
     "skill_1hour30": "Habilidad 1 hora 30 min",
@@ -85,7 +85,7 @@ export const translations = {
     "clear_history_btn": "Effacer l'historique",
     "back_to_Rules": "Retour à l'accueil",
     "roll_history": "Historique des lancers (10 derniers)",
-    "no_rolls": "Pas de lancers précédents."
+    "no_rolls": "Pas de lancers précédents.",
     "skill_30min": "Compétence 30 minutes",
     "skill_1hour": "Compétence 1 heure",
     "skill_1hour30": "Compétence 1 heure 30 min",
@@ -118,7 +118,7 @@ export const translations = {
     "clear_history_btn": "Kustuta nimekiri",
     "back_to_Rules": "Tagasi algusesse",
     "roll_history": "Viimased visked (10)",
-    "no_rolls": "Eelmisi viskeid pole."
+    "no_rolls": "Eelmisi viskeid pole.",
     "skill_30min": "Oskus 30 minutit",
     "skill_1hour": "Oskus 1 tund",
     "skill_1hour30": "Oskus 1 tund 30 min",
@@ -151,7 +151,7 @@ export const translations = {
     "clear_history_btn": "Liste löschen",
     "back_to_Rules": "Zurück zum Start",
     "roll_history": "Wurfhistorie (letzte 10)",
-    "no_rolls": "Bisher keine Würfe."
+    "no_rolls": "Bisher keine Würfe.",
     "skill_30min": "Fertigkeit 30 Minuten",
     "skill_1hour": "Fertigkeit 1 Stunde",
     "skill_1hour30": "Fertigkeit 1 Stunde 30 Min",
