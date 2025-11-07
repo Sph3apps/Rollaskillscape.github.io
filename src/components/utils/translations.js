@@ -19,7 +19,7 @@ export const translations = {
     "clear_history_btn": "Clear roll list",
     "back_to_Rules": "Back to Welcome",
     "roll_history": "Roll History (last 10)",
-    "no_rolls": "No previous rolls yet."
+    "no_rolls": "No previous rolls yet.",
     "skill_30min": "Skill for 30 minutes",
     "skill_1hour": "Skill for 1 hour",
     "skill_1hour30": "Skill for 1 hour 30 mins",
