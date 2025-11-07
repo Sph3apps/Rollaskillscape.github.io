@@ -103,7 +103,7 @@ const result = `
   const renderHistory = () => {
     if (history.length === 0) {
       return <em>{t('no_rolls')}</em>;
-    }
+    };
 
     return (
       <>
@@ -122,7 +122,7 @@ const result = `
     );
   };
 
-}
+
   return (
     <div className="glass-card game-panel active">
       <p dangerouslySetInnerHTML={{ __html: t('welcome_game') }} />
